@@ -1,0 +1,514 @@
+options:
+  parameters:
+    author: Kristoff Bonne (on1arf)
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: GPL v3
+    description: a simple GRC flow to create DTMF audio
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: GRCdtmfgenerator
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: 'DTMF generator '
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: char_per_sec
+  id: variable
+  parameters:
+    comment: ''
+    value: '6'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [800, 12.0]
+    rotation: 0
+    state: true
+- name: dtmftext
+  id: variable
+  parameters:
+    comment: ''
+    value: '''12 34 56 78 90 ab cd *#'''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [48, 316.0]
+    rotation: 0
+    state: true
+- name: offtime
+  id: variable
+  parameters:
+    comment: ''
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [720, 12.0]
+    rotation: 0
+    state: true
+- name: ontime
+  id: variable
+  parameters:
+    comment: ''
+    value: '5'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [640, 12.0]
+    rotation: 0
+    state: true
+- name: repeat_dtmftime_to_onesec
+  id: variable
+  parameters:
+    comment: ''
+    value: int((samp_rate/char_per_sec)/(ontime+offtime))
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [920, 12.0]
+    rotation: 0
+    state: true
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '48000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 20.0]
+    rotation: 0
+    state: enabled
+- name: sleeptime
+  id: variable
+  parameters:
+    comment: ''
+    value: '100'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [792, 76.0]
+    rotation: 0
+    state: true
+- name: audio_sink_0
+  id: audio_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    device_name: ''
+    num_inputs: '1'
+    ok_to_block: 'True'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1112, 156.0]
+    rotation: 0
+    state: true
+- name: blocks_add_xx_0
+  id: blocks_add_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [936, 224.0]
+    rotation: 0
+    state: true
+- name: blocks_multiply_xx_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [800, 168.0]
+    rotation: 0
+    state: true
+- name: blocks_multiply_xx_0_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [800, 272.0]
+    rotation: 0
+    state: true
+- name: blocks_repeat_0
+  id: blocks_repeat
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    interp: repeat_dtmftime_to_onesec
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [264, 140.0]
+    rotation: 0
+    state: true
+- name: blocks_repeat_0_0
+  id: blocks_repeat
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    interp: repeat_dtmftime_to_onesec
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [264, 196.0]
+    rotation: 0
+    state: true
+- name: blocks_repeat_0_0_0
+  id: blocks_repeat
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    interp: repeat_dtmftime_to_onesec
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [264, 252.0]
+    rotation: 0
+    state: true
+- name: blocks_repeat_0_0_0_0
+  id: blocks_repeat
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    interp: repeat_dtmftime_to_onesec
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [264, 300.0]
+    rotation: 0
+    state: true
+- name: blocks_throttle_0
+  id: blocks_throttle
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [440, 108.0]
+    rotation: 0
+    state: bypassed
+- name: blocks_vco_f_0
+  id: blocks_vco_f
+  parameters:
+    affinity: ''
+    alias: ''
+    amplitude: '0.45'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    sensitivity: 2*np.pi
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [616, 132.0]
+    rotation: 0
+    state: true
+- name: blocks_vco_f_0_0
+  id: blocks_vco_f
+  parameters:
+    affinity: ''
+    alias: ''
+    amplitude: '0.45'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    sensitivity: 2*np.pi
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [608, 236.0]
+    rotation: 0
+    state: true
+- name: blocks_wavfile_sink_0
+  id: blocks_wavfile_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bits_per_sample: '16'
+    comment: ''
+    file: /tmp/dtmfout.wav
+    nchan: '1'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1096, 68.0]
+    rotation: 0
+    state: true
+- name: epy_block_0
+  id: epy_block
+  parameters:
+    _source_code: "\"\"\"\nEmbedded Python Blocks:\n\nEach this file is saved, GRC\
+      \ will instantiate the first class it finds to get\nports and parameters of\
+      \ your block. The arguments to __init__  will be the\nparameters. All of them\
+      \ are required to have default values!\n\n\n\"\"\"\n#gr-dtmfgen: a gnuradio\
+      \ embedded python block for generationg DTMF messages\n#--------------------------------------------------------------------------\n\
+      #\n#\n#This is the alpha test release of gr-dtmfgen, a embedded python block\
+      \ for generating\n#DTMF message.\n#\n#\n# this block generates floats containing\
+      \ the frequencies of both DTMF tones\n# if this is fed to a VCO-block with sensitivity\
+      \ = 2 * n-p.pi, this creates the a sinewave at the required frequency\n# this\
+      \ block also outputs 'volume-control' values that are be used to switch on/off\
+      \ the outputted sinewaves and\n# their amplitude\n# the output of the lower\
+      \ tone is -2 db below the level of the higher tone\n#\n#\n#The python code itself\
+      \ is located inside the \"DTMF generator\" epy_block and as a seperate file\
+      \ \"gr-dtmf_generator.py\".\n#\n#\n# (C) Kristoff Bonne, ON1ARF\n# GPL v3\n\
+      #\n#Release-information:\n#Version: 0.0.1 (20201129)\n#\n# 73s . kristoff -\
+      \ ON1ARF\n\n\nimport numpy as np\nfrom gnuradio import gr\n\nimport time\n\n\
+      \n\nclass pdtmf_generator(gr.sync_block):\n\n\t# init some data\n\tfreqtable=((697.0,770.0,852.0,941.0,1209.0,1336.0,1477.0,1633.0))\n\
+      \tchar2freq={\n\t\t'1':(0,4), '2':(0,5), '3':(0,6), 'A':(0,7),\n\t\t'4':(1,4),\
+      \ '5':(1,5), '6':(1,6) ,'B':(1,7),\n\t\t'7':(2,4), '8':(2,5), '9':(2,6), 'C':(2,7),\n\
+      \t\t'*':(3,4), '0':(3,5), '#':(3,6), 'D':(3,7)\n\t\t}\n\n\tamplitude=(10**(-0.2),1.0)\
+      \ #lower tone is 2 db below higher tone \n\n\n\n\n\tdef __init__(self, txt =\
+      \ '123456', ontime=5,  offtime=1, sleeptime= 30):  # only default arguments\
+      \ here\n\t\tgr.sync_block.__init__(\n\t\t\tself,\n\t\t\tname='dtmf generator',\n\
+      \t\t\tin_sig=[],\n\t\t\tout_sig=[np.float32,np.float32,np.float32,np.float32]\n\
+      \t\t)\n\n\n\t\t# convert to integers\n\t\ttry:\n\t\t\tontime,offtime,sleeptime=(int(ontime),int(offtime),int(sleeptime))\n\
+      \t\texcept ValueError:\n\t\t\traise ValueError(\"Error converting ontime, offtime\
+      \ or sleeptime to integers\")\n\n\t\t# checking input\n\t\tif ontime < 0: raise\
+      \ ValueError(\"Error: on-time can not be negative\")\n\t\tif offtime < 0: raise\
+      \ ValueError(\"Error: off-time can not be negative\")\n\t\tif sleeptime < 0:\
+      \ raise ValueError(\"Error: sleep-time can not be negative\")\n\n\t\t# make\
+      \ text uppercase\n\t\ttxt=txt.upper()\n\n\t\t# create dtmg message\n\t\tdtmfmessage=[]\n\
+      \n\t\tfor c in txt:\n\t\t\ttry:\n\t\t\t\tf1,f2=pdtmf_generator.char2freq[c]\n\
+      \t\t\texcept KeyError:\n\t\t\t\t# unknown character -> ignore it\n\t\t\t\tcontinue\n\
+      \t\t\t#endtry\n\n\t\t\t# DTMF message is DTMF tones + silence\n\t\t\tdtmfmessage+=[(pdtmf_generator.freqtable[f1],pdtmf_generator.amplitude[0],pdtmf_generator.freqtable[f2],pdtmf_generator.amplitude[1])\
+      \ for _ in range(ontime)] + [(0.0,0.0,0.0,0.0) for _ in range(offtime)]\n\t\t\
+      #end for\n\n\n\t\t# do we have a valid message?\n\t\tl=len(dtmfmessage)\n\t\t\
+      if l == 0: raise ValueError(\"No valid text to send\")\n\n\n\t\t# the message\
+      \ is OK!\n\n\t\t# add 'sleeptime' periodes of silence\n\t\tdtmfmessage += [(0.0,0.0,0.0,0.0)\
+      \ for _ in range(sleeptime)]\n\n\t\tself.set_output_multiple(l+sleeptime)\n\n\
+      \t\tself.dtmfmessage=list(zip(*dtmfmessage))\n\t\tself.msglen=l+sleeptime\n\n\
+      \t#end __init__\n\n\tdef work(self, input_items, output_items):\n\t\t# copy\
+      \ DTMS message-data for all 4 output channels\n\t\tfor i in range(4):\n\t\t\t\
+      output_items[i][:self.msglen]=np.array(self.dtmfmessage[i], dtype=np.float32)\n\
+      \t\t#end for\n\n\t\treturn self.msglen # done\n\n\t#end work\n# end class \"\
+      pdtmf_generator\"\n"
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offtime: offtime
+    ontime: ontime
+    sleeptime: sleeptime
+    txt: dtmftext
+  states:
+    _io_cache: ('dtmf generator', 'pdtmf_generator', [('txt', "'123456'"), ('ontime',
+      '5'), ('offtime', '1'), ('sleeptime', '30')], [], [('0', 'float', 1), ('1',
+      'float', 1), ('2', 'float', 1), ('3', 'float', 1)], '', [])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [48, 176.0]
+    rotation: 0
+    state: true
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import numpy as np
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 404.0]
+    rotation: 0
+    state: true
+- name: qtgui_freq_sink_x_0
+  id: qtgui_freq_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '1.0'
+    axislabels: 'True'
+    bw: samp_rate
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    ctrlpanel: 'True'
+    fc: '0'
+    fftsize: '1024'
+    freqhalf: 'False'
+    grid: 'False'
+    gui_hint: ''
+    label: Relative Gain
+    label1: ''
+    label10: ''''''
+    label2: ''''''
+    label3: ''''''
+    label4: ''''''
+    label5: ''''''
+    label6: ''''''
+    label7: ''''''
+    label8: ''''''
+    label9: ''''''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '""'
+    nconnections: '1'
+    showports: 'False'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_tag: '""'
+    type: float
+    units: dB
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    wintype: firdes.WIN_BLACKMAN_hARRIS
+    ymax: '10'
+    ymin: '-140'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1112, 304.0]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_add_xx_0, '0', audio_sink_0, '0']
+- [blocks_add_xx_0, '0', blocks_wavfile_sink_0, '0']
+- [blocks_add_xx_0, '0', qtgui_freq_sink_x_0, '0']
+- [blocks_multiply_xx_0, '0', blocks_add_xx_0, '0']
+- [blocks_multiply_xx_0_0, '0', blocks_add_xx_0, '1']
+- [blocks_repeat_0, '0', blocks_throttle_0, '0']
+- [blocks_repeat_0_0, '0', blocks_multiply_xx_0, '1']
+- [blocks_repeat_0_0_0, '0', blocks_vco_f_0_0, '0']
+- [blocks_repeat_0_0_0_0, '0', blocks_multiply_xx_0_0, '1']
+- [blocks_throttle_0, '0', blocks_vco_f_0, '0']
+- [blocks_vco_f_0, '0', blocks_multiply_xx_0, '0']
+- [blocks_vco_f_0_0, '0', blocks_multiply_xx_0_0, '0']
+- [epy_block_0, '0', blocks_repeat_0, '0']
+- [epy_block_0, '1', blocks_repeat_0_0, '0']
+- [epy_block_0, '2', blocks_repeat_0_0_0, '0']
+- [epy_block_0, '3', blocks_repeat_0_0_0_0, '0']
+
+metadata:
+  file_format: 1
